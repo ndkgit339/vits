@@ -104,7 +104,7 @@ def japanese_cleaner(text):
     return phonemes
 def japanese_cleaner_pp_symbols(text):
     from pp_symbols import pp_symbols
-    phonemes = ' '.join(pp_symbols(pyopenjtalk.extract_fullcontextlabel(text)))
+    phonemes = ' '.join(pp_symbols(pyopenjtalk.extract_fullcontext(text)))
     return phonemes
 
 
