@@ -26,6 +26,7 @@ class TextAudioLoader(torch.utils.data.Dataset):
         self.hop_length     = hparams.hop_length 
         self.win_length     = hparams.win_length
         self.sampling_rate  = hparams.sampling_rate 
+        self.language = hparams.language
 
         self.cleaned_text = getattr(hparams, "cleaned_text", False)
 
@@ -82,6 +83,8 @@ class TextAudioLoader(torch.utils.data.Dataset):
 
     def get_text(self, text):
         if self.cleaned_text:
+            if self.language == 'japanese':
+                text = text.split(' ')
             text_norm = cleaned_text_to_sequence(text)
         else:
             text_norm = text_to_sequence(text, self.text_cleaners)
