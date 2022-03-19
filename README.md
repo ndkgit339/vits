@@ -1,3 +1,31 @@
+# VITS for spontaneous speech synthesis with filled pauses
+
+## VITS for JSUT
+
+## Pre-requisites
+0. Python >= 3.6
+1. Clone this repository
+2. Install python requirements. Please refer [requirements.txt](requirements.txt)
+    1. You may need to install espeak first: `apt-get install espeak`
+3. Download JSUT to ``./corpus/``.
+4. Build Monotonic Alignment Search and run preprocessing if you use your own datasets.
+```sh
+# Cython-version Monotonoic Alignment Search
+cd monotonic_align
+mkdir monotonic_align
+python setup.py build_ext --inplace
+
+# Preprocessing (g2p) for your own datasets. Preprocessed phonemes for LJ Speech and VCTK have been already provided.
+python preprocess.py --text_index 1 --filelists filelists/jsut_audio_text_train_filelist.txt filelists/jsut_audio_text_val_filelist.txt filelists/jsut_audio_text_test_filelist.txt
+```
+
+## Training Exmaple
+```sh
+# JSUT
+python train.py -c configs/jsut_base.json -m jsut_base
+```
+
+
 # VITS: Conditional Variational Autoencoder with Adversarial Learning for End-to-End Text-to-Speech
 
 ### Jaehyeon Kim, Jungil Kong, and Juhee Son
