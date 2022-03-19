@@ -1,6 +1,7 @@
 import argparse
 import text
 from utils import load_filepaths_and_text
+from tqdm import tqdm
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
@@ -15,10 +16,12 @@ if __name__ == '__main__':
   for filelist in args.filelists:
     print("START:", filelist)
     filepaths_and_text = load_filepaths_and_text(filelist)
+    progress_bar = tqdm(total=len(filepaths_and_text))
     for i in range(len(filepaths_and_text)):
       original_text = filepaths_and_text[i][args.text_index]
       cleaned_text = text._clean_text(original_text, args.text_cleaners)
       filepaths_and_text[i][args.text_index] = cleaned_text
+      progress_bar.update(1)
 
     new_filelist = filelist + "." + args.out_extension
     with open(new_filelist, "w", encoding="utf-8") as f:
