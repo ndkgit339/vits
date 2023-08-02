@@ -1,13 +1,20 @@
 from pathlib import Path
 from sklearn.model_selection import train_test_split
-
+import argparse
 
 if __name__ == "__main__":
-
-    jvs_path = "/home/sarulab/yuta_matsunaga/corpus/jvs_ver1"
+    def get_parser():
+        parser = argparse.ArgumentParser(
+            description="Prepare filelist for jvs dataset.")
+        parser.add_argument(
+            "--jvs_path", type=str, default="",
+            help="Path to jvs dataset.")
+        return parser
+    
+    args = get_parser().parse_args()
 
     train, val, test = [], [], []
-    for spk_path in Path(jvs_path).glob("jvs*"):
+    for spk_path in Path(args.jvs_path).glob("jvs*"):
         spk = spk_path.name
         spk = int(spk.split("jvs")[1])
         data_spk = []
