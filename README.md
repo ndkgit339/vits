@@ -7,16 +7,18 @@
 1. Clone this repository
 2. Install python requirements. Please refer [requirements.txt](requirements.txt)
     1. You may need to install espeak first: `apt-get install espeak`
-3. Download JSUT to ``./corpus/``.
-4. Build Monotonic Alignment Search and run preprocessing if you use your own datasets.
+3. Build Monotonic Alignment Search and run preprocessing if you use your own datasets.
 ```sh
 # Cython-version Monotonoic Alignment Search
 cd monotonic_align
 mkdir monotonic_align
 python setup.py build_ext --inplace
 
-# Preprocessing (g2p) for your own datasets. Preprocessed phonemes for LJ Speech and VCTK have been already provided.
-python preprocess.py --text_index 1 --filelists filelists/jsut_audio_text_train_filelist.txt filelists/jsut_audio_text_val_filelist.txt filelists/jsut_audio_text_test_filelist.txt
+# Preprocessing for JSUT or JVS.
+## JSUT
+python preprocess.py --text_index 1 --filelists filelists/jsut_audio_text_train_filelist.txt filelists/jsut_audio_text_val_filelist.txt filelists/jsut_audio_text_test_filelist.txt --text_cleaners japanese_cleaner_pp_symbols
+## JVS
+python preprocess.py --text_index 2 --filelists filelists/jvs_audio_sid_text_train_filelist.txt filelists/jvs_audio_sid_text_val_filelist.txt filelists/jvs_audio_sid_text_test_filelist.txt --text_cleaners japanese_cleaner_pp_symbols
 ```
 
 ## Training Exmaple

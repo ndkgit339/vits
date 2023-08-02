@@ -9,3 +9,11 @@ __pycache__
 build
 *.c
 monotonic_align/monotonic_align
+
+.python-version
+nohup*.out
+pyproject.toml
+requirements-dev.lock
+requirements.lock
+filelists/jvs*
+src/
