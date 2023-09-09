@@ -16,7 +16,7 @@ if __name__ == "__main__":
     train, val, test = [], [], []
     for spk_path in Path(args.jvs_path).glob("jvs*"):
         spk = spk_path.name
-        spk = int(spk.split("jvs")[1])
+        spk = int(spk.split("jvs")[1]) - 1
         data_spk = []
         for data_type in ["parallel100", "nonpara30"]:
             wav_dir = spk_path / data_type / "wav24kHz16bit"
